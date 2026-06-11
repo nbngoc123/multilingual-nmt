@@ -1,0 +1,11 @@
+# inference_config.yaml
+# Cấu hình cho quá trình sinh văn bản (sampling strategies)
+max_length: 128
+num_beams: 4
+length_penalty: 0.6
+do_sample: false
+# Để bật Top-p / Top-k, sử dụng các cấu hình bên dưới thay cho beam search
+# do_sample: true
+# top_p: 0.9
+# top_k: 50
+# temperature: 0.7

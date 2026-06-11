@@ -1,0 +1,10 @@
+# data_config.yaml
+# Cấu hình liên quan đến việc tải và xử lý dữ liệu
+lang_pairs:
+  - "en-vi"
+  - "en-fr"
+  - "de-en"
+max_samples: 500
+val_samples: 10
+test_samples: 20
+max_length: 128

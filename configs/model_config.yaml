@@ -1,0 +1,3 @@
+# model_config.yaml
+# Cấu hình kiến trúc và tham số của model
+model_name: "facebook/mbart-large-50-many-to-many-mmt"

@@ -1,0 +1,8 @@
+# env_config.example.yaml
+# Cấu hình phụ thuộc vào môi trường máy tính
+# Đổi tên file này thành env_config.yaml để sử dụng
+data_dir: "./data"
+output_dir: "./outputs"
+cache_dir: "./cache"
+device: "cuda"
+num_workers: 4

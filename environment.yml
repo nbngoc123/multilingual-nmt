@@ -1,0 +1,45 @@
+name: env
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.11
+  - pytorch>=2.2.0
+  - pytorch-cuda=12.1
+  - pip
+  - pip:
+      # ONNX Runtime (GPU)
+      - onnxruntime-gpu>=1.17.0
+      - onnx>=1.16.0
+      # HuggingFace & Models
+      - datasets>=2.18.0      
+      - transformers>=4.40.0 
+      - accelerate>=0.29.0   
+      - sentencepiece>=0.2.0 
+      # API & UI
+      - fastapi>=0.110.0
+      - uvicorn>=0.29.0
+      - gradio>=4.0.0
+      # Metrics & Tracking
+      - wandb>=0.16.0
+      - evaluate>=0.4.0     
+      - sacrebleu>=2.4.0      
+      # Utils & Config
+      - pyyaml>=6.0.0
+      - tqdm>=4.66.0
+      - numpy>=1.26.0
+      - pandas>=2.0.0
+      - gdown>=5.0.0
+      - python-dotenv>=1.0.0 
+      # Testing & Notebooks
+      - pytest>=8.0.0
+      - jupyter>=1.0.0
+      - matplotlib>=3.8.0
+
+
+# conda env update -f environment.yml --prune
+# conda env create -f environment.yml
+# conda create --name multilingual-nmt --clone screen-ocr
+# conda remove --name screen-ocr --all
+
