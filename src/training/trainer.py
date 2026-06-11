@@ -28,23 +28,26 @@ class BalancedLossSeq2SeqTrainer(Seq2SeqTrainer):
         """
         Ghi đè hàm tính Loss mặc định.
         """
-        # Bước cực kỳ quan trọng:
-        # Nhấc cột 'pair' ra khỏi dict `inputs` trước khi đưa vào Model.
-        # Nếu để quên chữ 'en-vi' bay vào mô hình Neural Network, nó sẽ crash ngay lập tức!
         pairs = inputs.pop("pair", None)
         
-        if pairs is None:
-            raise ValueError("Lỗi nghiêm trọng: Không tìm thấy cột 'pair' trong inputs. Vui lòng kiểm tra lại DataCollator!")
-
         # 1. Forward Pass: Đưa toàn bộ inputs còn lại (toàn số) vào mô hình
         outputs = model(**inputs)
         
-        # Lấy Logits (dự đoán của mạng) và Labels (đáp án đúng)
+        # Nếu không có cột pair (thường xảy ra ở bước Evaluation), dùng loss mặc định
+        if pairs is None:
+            loss = outputs.get("loss")
+            return (loss, outputs) if return_outputs else loss
+
+        # 2. Đẩy dự đoán, đáp án và danh sách "en-vi" vào cái Cân (BalancedLoss) để tính phạt
         logits = outputs.get("logits")
         labels = inputs.get("labels")
-        
-        # 2. Đẩy dự đoán, đáp án và danh sách "en-vi" vào cái Cân (BalancedLoss) để tính phạt
         loss = self.custom_loss_fct(logits, labels, pairs)
         
-        # Trả về kết quả theo chuẩn format của HuggingFace
         return (loss, outputs) if return_outputs else loss
+
+    def prediction_step(self, model, inputs, prediction_loss_only, ignore_keys=None):
+        """
+        Ghi đè bước Evaluation để loại bỏ triệt để cột 'pair' trước khi chui vào model.generate()
+        """
+        _ = inputs.pop("pair", None)
+        return super().prediction_step(model, inputs, prediction_loss_only, ignore_keys)
