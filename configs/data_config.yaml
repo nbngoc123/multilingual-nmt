@@ -4,7 +4,7 @@ lang_pairs:
   - "en-vi"
   - "en-fr"
   - "de-en"
-max_samples: 50000
-val_samples: 10000
+max_samples: 20000
+val_samples: 6000
 test_samples: 1000
 max_length: 128
