@@ -70,7 +70,7 @@ def main():
         args=training_args,
         train_dataset=tokenized_datasets["train"],
         eval_dataset=tokenized_datasets["validation"],
-        tokenizer=tokenizer,
+        processing_class=tokenizer, # transformers bản mới đổi tên tham số này
         data_collator=custom_collate_fn, 
         compute_metrics=get_compute_metrics(tokenizer),
         callbacks=callbacks
