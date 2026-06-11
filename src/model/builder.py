@@ -4,7 +4,8 @@ from transformers import AutoModelForSeq2SeqLM
 
 logger = logging.getLogger(__name__)
 
-def load_mbart_model(model_name: str, cache_dir: str = "./cache"):
+# def load_mbart_model(model_name: str, cache_dir: str = "./cache"):
+def load_mbart_model(model_name: str, cache_dir: str = "./models"):
     """
     Hàm khởi tạo Neural Network cho mô hình mBART50.
     

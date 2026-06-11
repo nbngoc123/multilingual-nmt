@@ -2,7 +2,6 @@ import os
 import sys
 from collections import Counter
 
-# Thêm thư mục gốc vào đường dẫn để import được src/
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
 
 from src.utils.logger import setup_logger
@@ -54,7 +53,7 @@ def main():
         preprocessor.preprocess_function,
         batched=True,
         batch_size=1000,
-        remove_columns=["src", "tgt"] # Xóa cột văn bản thô, nhưng GIỮ LẠI cột 'pair'
+        remove_columns=["src", "tgt"] 
     )
     
     # 6. Cấu hình Training
@@ -70,7 +69,7 @@ def main():
         args=training_args,
         train_dataset=tokenized_datasets["train"],
         eval_dataset=tokenized_datasets["validation"],
-        processing_class=tokenizer, # transformers bản mới đổi tên tham số này
+        processing_class=tokenizer,
         data_collator=custom_collate_fn, 
         compute_metrics=get_compute_metrics(tokenizer),
         callbacks=callbacks

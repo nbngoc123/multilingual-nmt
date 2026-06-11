@@ -89,5 +89,47 @@ def main():
     plt.savefig(plot_path2, dpi=300)
     print(f"✅ Đã lưu biểu đồ Phân phối độ dài tại: {plot_path2}")
 
+    # ==========================================
+    # BIỂU ĐỒ 3: XUẤT BẢNG VÍ DỤ CÂU DỊCH RA ẢNH PNG
+    # ==========================================
+    print("Đang vẽ ảnh Bảng dữ liệu (Table)...")
+    # Lấy 8 mẫu ngẫu nhiên (chỉ lấy các cột quan trọng)
+    sample_df = df[["pair", "source_text", "target_true", "prediction"]].sample(n=min(8, len(df)), random_state=42)
+    
+    # Cắt ngắn text (tối đa 60 ký tự) để chữ không tràn ra ngoài ảnh
+    for col in ["source_text", "target_true", "prediction"]:
+        sample_df[col] = sample_df[col].apply(lambda x: str(x)[:60] + "..." if len(str(x)) > 60 else str(x))
+        
+    fig, ax = plt.subplots(figsize=(16, 5)) # Ảnh dài ra ngang để dễ đọc text
+    ax.axis('tight')
+    ax.axis('off')
+    
+    # Vẽ bảng bằng Matplotlib
+    table = ax.table(
+        cellText=sample_df.values, 
+        colLabels=["Cặp ngôn ngữ", "Câu gốc (Source)", "Đúng (Ground Truth)", "Mô hình Dịch (Prediction)"], 
+        loc='center', 
+        cellLoc='left'
+    )
+    
+    # Canh lề và thiết lập font
+    table.auto_set_font_size(False)
+    table.set_fontsize(11)
+    table.scale(1, 2.5) # Kéo giãn chiều cao các hàng
+    
+    # Làm đẹp tiêu đề (cột header)
+    for (row, col), cell in table.get_celld().items():
+        if row == 0:
+            cell.set_text_props(weight='bold', color='white')
+            cell.set_facecolor('#2b5b84')
+            
+    plt.title("Một số ví dụ câu dịch ngẫu nhiên từ mô hình", fontsize=16, fontweight='bold', pad=20)
+    
+    plot_path3 = "outputs/sample_translations_table.png"
+    plt.tight_layout()
+    plt.savefig(plot_path3, dpi=300, bbox_inches="tight")
+    print(f"✅ Đã lưu ảnh Bảng dữ liệu mẫu tại: {plot_path3}")
+
+
 if __name__ == "__main__":
     main()

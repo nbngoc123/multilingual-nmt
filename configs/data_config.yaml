@@ -2,9 +2,10 @@
 # Cấu hình liên quan đến việc tải và xử lý dữ liệu
 lang_pairs:
   - "en-vi"
-  - "en-fr"
-  - "de-en"
-max_samples: 10000
-val_samples: 3000
-test_samples: 1000
+  - "en-ja"
+  # - "en-fr"
+  # - "de-en"
+max_samples: 5000
+val_samples: 1000
+test_samples: 500
 max_length: 128
