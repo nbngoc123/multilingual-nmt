@@ -80,7 +80,16 @@ def main():
     logger.info("🚀 Bắt đầu HUẤN LUYỆN!")
     trainer.train()
 
-    # 9. Lưu trữ sau khi chạy xong
+    # 9. Lưu trữ lịch sử huấn luyện (Loss, BLEU) để vẽ biểu đồ
+    logger.info("Đang xuất dữ liệu biểu đồ...")
+    import json
+    os.makedirs("outputs", exist_ok=True)
+    history_path = "outputs/training_history.json"
+    with open(history_path, "w", encoding="utf-8") as f:
+        json.dump(trainer.state.log_history, f, indent=4)
+    logger.info(f"Đã lưu lịch sử huấn luyện tại {history_path}")
+
+    # 10. Lưu trữ sau khi chạy xong
     logger.info("Đang lưu mô hình hoàn chỉnh...")
     trainer.save_model("./saved_models/mbart50-balanced-final")
     tokenizer.save_pretrained("./saved_models/mbart50-balanced-final")
