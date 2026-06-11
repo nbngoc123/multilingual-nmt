@@ -4,3 +4,11 @@ batch_size: 8
 lr: 0.00005  # 5e-5
 num_epochs: 2
 warmup_steps: 500
+
+# Cấu hình mở rộng cho Trainer
+weight_decay: 0.01
+save_total_limit: 3
+fp16: true
+logging_steps: 10
+eval_strategy: "epoch"
+save_strategy: "epoch"

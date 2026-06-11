@@ -1,11 +1,19 @@
-# inference_config.yaml
-# Cấu hình cho quá trình sinh văn bản (sampling strategies)
+# configs/inference_config.yaml
+# Cấu hình cho quá trình suy luận (Inference / Dịch máy)
+
+# Các chế độ: "top_p", "top_k", "both", "greedy"
+strategy: "both"
+
+# Nhiệt độ (Temperature) làm mịn xác suất: 
+# < 1.0: Ít ngẫu nhiên, từ vựng an toàn
+# > 1.0: Ngẫu nhiên nhiều, sáng tạo hơn
+temperature: 0.7
+
+# Nucleus Sampling: Lấy các token cộng dồn xác suất lên đến 90%
+top_p: 0.9
+
+# Top-k Sampling: Chỉ bốc trong 50 token có khả năng cao nhất
+top_k: 50
+
+# Giới hạn độ dài câu dịch đầu ra
 max_length: 128
-num_beams: 4
-length_penalty: 0.6
-do_sample: false
-# Để bật Top-p / Top-k, sử dụng các cấu hình bên dưới thay cho beam search
-# do_sample: true
-# top_p: 0.9
-# top_k: 50
-# temperature: 0.7

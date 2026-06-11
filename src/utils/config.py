@@ -16,6 +16,12 @@ class TrainConfig:
     lr: float
     num_epochs: int
     warmup_steps: int
+    weight_decay: float
+    save_total_limit: int
+    fp16: bool
+    logging_steps: int
+    eval_strategy: str
+    save_strategy: str
 
 def load_config(path: str) -> dict:
     """Đọc cấu hình từ file YAML."""

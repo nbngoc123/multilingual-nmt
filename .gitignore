@@ -42,3 +42,7 @@ cache/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# Model weights and checkpoints
+models/
+saved_models/
+logs/
